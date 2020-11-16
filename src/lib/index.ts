@@ -1,4 +1,5 @@
 import { Action } from "./Action";
+import { AttackResult, DefenseResult } from "./ActionResult";
 import { Deck } from "./Deck";
 import { Html5RenderEngine } from "./Html5RenderEngine";
 import { Player } from "./Player";
@@ -11,10 +12,9 @@ const DEBUG_COST_ACTION_2 = "R1,G1,B1";
 
 const myDeck = Deck.parse(DEBUG_DECK);
 
-
-const actionFireball = new Action("Fireball", DEBUG_COST_ACTION_1);
-const actionUltima = new Action("Ultima", DEBUG_COST_ACTION_2);
-const actionDefense = new Action("Defense", "X1");
+const actionFireball = new Action("Fireball", DEBUG_COST_ACTION_1, new AttackResult(10));
+const actionUltima = new Action("Ultima", DEBUG_COST_ACTION_2, new AttackResult(15));
+const actionDefense = new Action("Defense", "X1", new DefenseResult());
 
 const player = new Player("John Doe", myDeck, [actionDefense, actionFireball, actionUltima]);
 
@@ -28,8 +28,6 @@ export class Game {
     init() {
         this.player.shuffle();
         this.player.draw(4);
-        // this.renderEngine.init(this);
-        // this.renderEngine.render(this);
     }
 }
 
