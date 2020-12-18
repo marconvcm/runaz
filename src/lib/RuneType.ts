@@ -1,7 +1,7 @@
 export enum RuneType {
-    Red = "R",
-    Green = "G",
-    Blue = "B",
-    Yellow = "Y",
+    Fire = "R",
+    Nature = "G",
+    Water = "B",
+    Earth = "Y",
     Any = "X"
 }

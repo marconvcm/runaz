@@ -24,4 +24,21 @@ function generateSprites() {
     return css;
 }
 
-console.log(generateSprites());
+
+export function uniqueString(length = 6): string {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+ }
+
+export const range = (n) => Array.from(Array(n).keys());
+
+export const rnd = (min, max) => Math.round(Math.random() * (max - min) + min);
+
+export const buildCard = () => `[${rnd(0, 10)},${rnd(0, 10)},${rnd(0, 10)},${rnd(0, 10)}]`;
+
+export const buildDeck = (amount = 10) => range(amount).map (() => buildCard());

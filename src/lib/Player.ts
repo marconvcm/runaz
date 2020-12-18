@@ -1,7 +1,6 @@
-import { Action } from "./Action";
-import { ActionResult } from "./ActionResult";
 import { Deck } from "./Deck";
 import { Rune } from "./Rune";
+import { Side } from "./Side";
 
 export class Player {
 
@@ -9,15 +8,16 @@ export class Player {
 
     private selected: Rune = null;
 
+    private _side: Side;
+
     constructor(
         protected name: string,
-        protected deck: Deck,
-        protected actions: Array<Action>
+        protected deck: Deck
     ) { }
 
-    getHand(): Array<Rune> { return this.hand; }
+    get side() { return this._side; }
 
-    getActions(): Array<Action> { return this.actions; }
+    getHand(): Array<Rune> { return this.hand; }
 
     getSelected(): Rune { return this.selected; }
 
@@ -38,20 +38,6 @@ export class Player {
 
     unselect(): void {
         this.selected = undefined;
-    }
-
-    invoke(action: number, input: Array<number>): ActionResult {
-        const self = this;
-        const tribute = input.map(i => this.hand[i]);
-        const result = this.actions[action].invoke(tribute);
-        return {
-            run(target: Player) {
-                if(result) {
-                    result.run(target);
-                    self.discard(input);
-                }
-            }
-        }
     }
 
     discard(input: Array<number>) {

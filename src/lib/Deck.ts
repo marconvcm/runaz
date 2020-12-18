@@ -9,7 +9,7 @@ export class Deck {
     }
 
     static parse(input: String): Deck {
-        const runes = input.split(',').map(Rune.parse);
+        const runes = input.split('|').map(Rune.parse);
         return new Deck(runes);
     }
 

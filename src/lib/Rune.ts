@@ -1,3 +1,4 @@
+import { Power } from "./Power";
 import { RuneType } from "./RuneType";
 
 export class Rune {
@@ -8,12 +9,16 @@ export class Rune {
 
     constructor(
         private _runeType: RuneType,
-        private _power: number
+        private _power: Set<Power>
     ) { }
 
+    // Input: R-N9,W9,E9,S1
     static parse(input: String): Rune {
-        const [type, power] = input.split('');
-        return new Rune(<RuneType>type, parseInt(power));
+        const [type, power] = input.split('-');
+        return new Rune(
+            <RuneType>type,
+            new Set(power.split(',').map(Power.parse)) 
+        );
     }
 
     isEqualTo(rune: Rune) {
